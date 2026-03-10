@@ -76,10 +76,13 @@ app.use('/api/progress', progressRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {
+  const mongoose = require('mongoose');
   res.json({ 
     status: 'OK', 
     message: 'NEXUS API is running',
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
+    db: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
+    dbState: mongoose.connection.readyState
   });
 });
 
