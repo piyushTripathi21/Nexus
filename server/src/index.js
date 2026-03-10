@@ -26,7 +26,7 @@ app.use(helmet());
 
 const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:5173')
   .split(',')
-  .map(origin => origin.trim());
+  .map(origin => origin.trim().replace(/\/+$/, ''));
 
 app.use(cors({
   origin: function (origin, callback) {
